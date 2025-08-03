@@ -1,1 +1,45 @@
+# 后端配置：使用 GitHub 直接授权（适配 GitHub Pages）
+backend:
+  name: github
+  repo: wangxin-oss/diyici  # 你的 GitHub 仓库（用户名/仓库名）
+  branch: main  # 仓库主分支（通常为 main 或 master，根据实际修改）
+  base_url: https://wangxin-oss.github.io/diyici  # GitHub Pages 基础路径（含子目录）
+  oauth:
+    client_id: Ov23liBZyjFLRf6vUuYF  # 替换为你的 GitHub OAuth Client ID
 
+# 媒体文件存储路径（相对于仓库根目录）
+media_folder: "source/images/uploads"  # 仓库中实际存储上传文件的目录
+public_folder: "/diyici/source/images/uploads"  # GitHub Pages 中访问媒体的路径（含子目录）
+
+# 网站 URL 配置
+site_url: https://wangxin-oss.github.io/diyici/  # 完整网站地址
+display_url: https://wangxin-oss.github.io/diyici/  # CMS 中显示的网站地址
+
+# 界面语言
+locale: "zh_Hans"  # 简体中文
+
+# 内容集合配置（根据你的需求调整字段）
+collections:
+  - name: "posts"  # 集合名称（用于路由）
+    label: "博客文章"  # CMS 后台显示名称
+    folder: "source/_posts"  # 文章在仓库中的存储目录
+    create: true  # 允许创建新文章
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"  # 自动生成的文件名格式
+    fields:  # 文章字段（Front-matter）
+      - {label: "标题", name: "title", widget: "string", required: true}
+      - {label: "发布日期", name: "date", widget: "datetime", format: "YYYY-MM-DD HH:mm:ss", required: true}
+      - {label: "更新日期", name: "updated", widget: "datetime", format: "YYYY-MM-DD HH:mm:ss", required: false}
+      - {label: "标签", name: "tags", widget: "list", required: false}
+      - {label: "分类", name: "categories", widget: "list", required: false}
+      - {label: "摘要", name: "description", widget: "text", required: false}
+      - {label: "内容", name: "body", widget: "markdown", required: true}
+
+  - name: "pages"  # 独立页面集合（如关于页、首页）
+    label: "页面"
+    files:
+      - file: "source/about/index.md"  # 关于页在仓库中的路径
+        name: "about"
+        label: "关于页面"
+        fields:
+          - {label: "标题", name: "title", widget: "string", required: true}
+          - {label: "内容", name: "body", widget: "markdown", required: true}
